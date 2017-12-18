@@ -1,0 +1,39 @@
+#---
+#spring:
+#  application:
+#    name: erp-svc-eureka
+#  profiles: peer1
+#server:
+#  port: 18000
+#eureka:
+#  instance:
+#    hostname: peer1
+#  client:
+#    serviceUrl:
+#      defaultZone: http://peer2:18001/eureka/,http://peer3:18002/eureka/
+#---
+#spring:
+#  application:
+#    name: erp-svc-eureka
+#  profiles: peer2
+#server:
+#  port: 18001
+#eureka:
+#  instance:
+#    hostname: peer2
+#  client:
+#    serviceUrl:
+#      defaultZone: http://peer1:18000/eureka/,http://peer3:18002/eureka/
+#---
+#spring:
+#  application:
+#    name: erp-svc-eureka
+#  profiles: peer3
+#server:
+#  port: 18002
+#eureka:
+#  instance:
+#    hostname: peer3
+#  client:
+#    serviceUrl:
+#      defaultZone: http://peer1:18000/eureka/,http://peer2:18001/eureka/

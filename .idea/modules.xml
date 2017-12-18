@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../ERP/ERP.iml" filepath="$PROJECT_DIR$/../ERP/ERP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ERP/common-util/common-util.iml" filepath="$PROJECT_DIR$/../ERP/common-util/common-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ERP/demo/demo.iml" filepath="$PROJECT_DIR$/../ERP/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ERP/erp-svc-eureka/erp-svc-eureka.iml" filepath="$PROJECT_DIR$/../ERP/erp-svc-eureka/erp-svc-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ERP/erp-svc-goods/erp-svc-goods.iml" filepath="$PROJECT_DIR$/../ERP/erp-svc-goods/erp-svc-goods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ERP/erp-svc-eureka/eureka.iml" filepath="$PROJECT_DIR$/../ERP/erp-svc-eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ERP/goods/goods.iml" filepath="$PROJECT_DIR$/../ERP/goods/goods.iml" />
+    </modules>
+  </component>
+</project>

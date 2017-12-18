@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.binger.goods.dao.GoodsColorMapper">
+  <resultMap id="BaseResultMap" type="com.binger.goods.domain.GoodsColor">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="color_code" jdbcType="VARCHAR" property="colorCode" />
+    <result column="color_name" jdbcType="VARCHAR" property="colorName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="block_time" jdbcType="TIMESTAMP" property="blockTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, color_code, color_name, remark, status, block_time, creator, create_time, modifier, 
+    modify_time
+  </sql>
+  <select id="selectByExample" parameterType="com.binger.goods.domain.GoodsColorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from goods_color
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods_color
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods_color
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.binger.goods.domain.GoodsColorExample">
+    delete from goods_color
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.binger.goods.domain.GoodsColor">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods_color (color_code, color_name, remark, 
+      status, block_time, creator, 
+      create_time, modifier, modify_time
+      )
+    values (#{colorCode,jdbcType=VARCHAR}, #{colorName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT}, #{blockTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.binger.goods.domain.GoodsColor">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods_color
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="colorCode != null">
+        color_code,
+      </if>
+      <if test="colorName != null">
+        color_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="blockTime != null">
+        block_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="colorCode != null">
+        #{colorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="colorName != null">
+        #{colorName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="blockTime != null">
+        #{blockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.binger.goods.domain.GoodsColorExample" resultType="java.lang.Long">
+    select count(*) from goods_color
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goods_color
+    <set>
+      <if test="record.colorCode != null">
+        <if test="record.colorCode == 'erpsetnull'">
+          color_code= null,
+        </if>
+        <if test="record.colorCode != 'erpsetnull'">
+          color_code= #{record.colorCode,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.colorName != null">
+        <if test="record.colorName == 'erpsetnull'">
+          color_name= null,
+        </if>
+        <if test="record.colorName != 'erpsetnull'">
+          color_name= #{record.colorName,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.remark != null">
+        <if test="record.remark == 'erpsetnull'">
+          remark= null,
+        </if>
+        <if test="record.remark != 'erpsetnull'">
+          remark= #{record.remark,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.creator != null">
+        <if test="record.creator == 'erpsetnull'">
+          creator= null,
+        </if>
+        <if test="record.creator != 'erpsetnull'">
+          creator= #{record.creator,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.modifier != null">
+        <if test="record.modifier == 'erpsetnull'">
+          modifier= null,
+        </if>
+        <if test="record.modifier != 'erpsetnull'">
+          modifier= #{record.modifier,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.blockTime != null">
+        <if test="record.blockTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          block_time= null,
+        </if>
+        <if test="record.blockTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          block_time= #{record.blockTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="record.createTime != null">
+        <if test="record.createTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          create_time= null,
+        </if>
+        <if test="record.createTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          create_time= #{record.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="record.modifyTime != null">
+        <if test="record.modifyTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          modify_time= null,
+        </if>
+        <if test="record.modifyTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          modify_time= #{record.modifyTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="record.status != null">
+        status= #{record.status,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goods_color
+    set id = #{record.id,jdbcType=INTEGER},
+      color_code = #{record.colorCode,jdbcType=VARCHAR},
+      color_name = #{record.colorName,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT},
+      block_time = #{record.blockTime,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.binger.goods.domain.GoodsColor">
+    update goods_color
+    <set>
+      <if test="colorCode != null">
+        <if test="colorCode == 'erpsetnull'">
+          color_code= null,
+        </if>
+        <if test="colorCode != 'erpsetnull'">
+          color_code= #{colorCode,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="colorName != null">
+        <if test="colorName == 'erpsetnull'">
+          color_name= null,
+        </if>
+        <if test="colorName != 'erpsetnull'">
+          color_name= #{colorName,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="remark != null">
+        <if test="remark == 'erpsetnull'">
+          remark= null,
+        </if>
+        <if test="remark != 'erpsetnull'">
+          remark= #{remark,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="creator != null">
+        <if test="creator == 'erpsetnull'">
+          creator= null,
+        </if>
+        <if test="creator != 'erpsetnull'">
+          creator= #{creator,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="modifier != null">
+        <if test="modifier == 'erpsetnull'">
+          modifier= null,
+        </if>
+        <if test="modifier != 'erpsetnull'">
+          modifier= #{modifier,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="blockTime != null">
+        <if test="blockTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          block_time= null,
+        </if>
+        <if test="blockTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          block_time= #{blockTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="createTime != null">
+        <if test="createTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          create_time= null,
+        </if>
+        <if test="createTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          create_time= #{createTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="modifyTime != null">
+        <if test="modifyTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          modify_time= null,
+        </if>
+        <if test="modifyTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          modify_time= #{modifyTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="status != null">
+        status= #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.binger.goods.domain.GoodsColor">
+    update goods_color
+    set color_code = #{colorCode,jdbcType=VARCHAR},
+      color_name = #{colorName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      block_time = #{blockTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithColSelected" parameterType="com.binger.goods.domain.GoodsColorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    ${selectiveField.toString()} 
+    from goods_color
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKeyWithColSelected" resultMap="BaseResultMap">
+    select 
+    ${selectiveField.toString()} 
+    from goods_color
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

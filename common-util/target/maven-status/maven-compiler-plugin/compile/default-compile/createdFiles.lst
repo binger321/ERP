@@ -1,0 +1,5 @@
+com\binger\common\Page.class
+com\binger\common\Const.class
+com\binger\common\util\DozerUtils.class
+com\binger\common\ResponseCode.class
+com\binger\common\ServerResponse.class

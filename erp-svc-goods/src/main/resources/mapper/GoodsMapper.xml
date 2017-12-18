@@ -1,0 +1,1075 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.binger.goods.dao.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.binger.goods.domain.Goods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="goods_code" jdbcType="VARCHAR" property="goodsCode" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_en_name" jdbcType="VARCHAR" property="goodsEnName" />
+    <result column="main_img_url" jdbcType="VARCHAR" property="mainImgUrl" />
+    <result column="category_one_id" jdbcType="INTEGER" property="categoryOneId" />
+    <result column="category_two_id" jdbcType="INTEGER" property="categoryTwoId" />
+    <result column="category_three_id" jdbcType="INTEGER" property="categoryThreeId" />
+    <result column="category_four_id" jdbcType="INTEGER" property="categoryFourId" />
+    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+    <result column="cost_price" jdbcType="DECIMAL" property="costPrice" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="specification" jdbcType="VARCHAR" property="specification" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="material" jdbcType="VARCHAR" property="material" />
+    <result column="is_production" jdbcType="INTEGER" property="isProduction" />
+    <result column="manager_id" jdbcType="INTEGER" property="managerId" />
+    <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
+    <result column="purchase_link" jdbcType="VARCHAR" property="purchaseLink" />
+    <result column="same_purchase_link" jdbcType="VARCHAR" property="samePurchaseLink" />
+    <result column="style_id" jdbcType="INTEGER" property="styleId" />
+    <result column="style_one" jdbcType="VARCHAR" property="styleOne" />
+    <result column="style_two" jdbcType="VARCHAR" property="styleTwo" />
+    <result column="style_three" jdbcType="VARCHAR" property="styleThree" />
+    <result column="style_four" jdbcType="VARCHAR" property="styleFour" />
+    <result column="style_five" jdbcType="VARCHAR" property="styleFive" />
+    <result column="style_six" jdbcType="VARCHAR" property="styleSix" />
+    <result column="style_seven" jdbcType="VARCHAR" property="styleSeven" />
+    <result column="style_eight" jdbcType="VARCHAR" property="styleEight" />
+    <result column="goods_type" jdbcType="INTEGER" property="goodsType" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="block_time" jdbcType="TIMESTAMP" property="blockTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, goods_code, goods_name, goods_en_name, main_img_url, category_one_id, category_two_id, 
+    category_three_id, category_four_id, brand_id, cost_price, weight, specification, 
+    model, material, is_production, manager_id, manager_name, purchase_link, same_purchase_link, 
+    style_id, style_one, style_two, style_three, style_four, style_five, style_six, style_seven, 
+    style_eight, goods_type, status, block_time, creator, create_time, modifier, modify_time
+  </sql>
+  <select id="selectByExample" parameterType="com.binger.goods.domain.GoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.binger.goods.domain.GoodsExample">
+    delete from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.binger.goods.domain.Goods">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods (goods_code, goods_name, goods_en_name, 
+      main_img_url, category_one_id, category_two_id, 
+      category_three_id, category_four_id, brand_id, 
+      cost_price, weight, specification, 
+      model, material, is_production, 
+      manager_id, manager_name, purchase_link, 
+      same_purchase_link, style_id, style_one, 
+      style_two, style_three, style_four, 
+      style_five, style_six, style_seven, 
+      style_eight, goods_type, status, 
+      block_time, creator, create_time, 
+      modifier, modify_time)
+    values (#{goodsCode,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{goodsEnName,jdbcType=VARCHAR}, 
+      #{mainImgUrl,jdbcType=VARCHAR}, #{categoryOneId,jdbcType=INTEGER}, #{categoryTwoId,jdbcType=INTEGER}, 
+      #{categoryThreeId,jdbcType=INTEGER}, #{categoryFourId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, 
+      #{costPrice,jdbcType=DECIMAL}, #{weight,jdbcType=DECIMAL}, #{specification,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR}, #{isProduction,jdbcType=INTEGER}, 
+      #{managerId,jdbcType=INTEGER}, #{managerName,jdbcType=VARCHAR}, #{purchaseLink,jdbcType=VARCHAR}, 
+      #{samePurchaseLink,jdbcType=VARCHAR}, #{styleId,jdbcType=INTEGER}, #{styleOne,jdbcType=VARCHAR}, 
+      #{styleTwo,jdbcType=VARCHAR}, #{styleThree,jdbcType=VARCHAR}, #{styleFour,jdbcType=VARCHAR}, 
+      #{styleFive,jdbcType=VARCHAR}, #{styleSix,jdbcType=VARCHAR}, #{styleSeven,jdbcType=VARCHAR}, 
+      #{styleEight,jdbcType=VARCHAR}, #{goodsType,jdbcType=INTEGER}, #{status,jdbcType=BIT}, 
+      #{blockTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.binger.goods.domain.Goods">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsCode != null">
+        goods_code,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="goodsEnName != null">
+        goods_en_name,
+      </if>
+      <if test="mainImgUrl != null">
+        main_img_url,
+      </if>
+      <if test="categoryOneId != null">
+        category_one_id,
+      </if>
+      <if test="categoryTwoId != null">
+        category_two_id,
+      </if>
+      <if test="categoryThreeId != null">
+        category_three_id,
+      </if>
+      <if test="categoryFourId != null">
+        category_four_id,
+      </if>
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="costPrice != null">
+        cost_price,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="specification != null">
+        specification,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="material != null">
+        material,
+      </if>
+      <if test="isProduction != null">
+        is_production,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+      <if test="managerName != null">
+        manager_name,
+      </if>
+      <if test="purchaseLink != null">
+        purchase_link,
+      </if>
+      <if test="samePurchaseLink != null">
+        same_purchase_link,
+      </if>
+      <if test="styleId != null">
+        style_id,
+      </if>
+      <if test="styleOne != null">
+        style_one,
+      </if>
+      <if test="styleTwo != null">
+        style_two,
+      </if>
+      <if test="styleThree != null">
+        style_three,
+      </if>
+      <if test="styleFour != null">
+        style_four,
+      </if>
+      <if test="styleFive != null">
+        style_five,
+      </if>
+      <if test="styleSix != null">
+        style_six,
+      </if>
+      <if test="styleSeven != null">
+        style_seven,
+      </if>
+      <if test="styleEight != null">
+        style_eight,
+      </if>
+      <if test="goodsType != null">
+        goods_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="blockTime != null">
+        block_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsCode != null">
+        #{goodsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEnName != null">
+        #{goodsEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImgUrl != null">
+        #{mainImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryOneId != null">
+        #{categoryOneId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryTwoId != null">
+        #{categoryTwoId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryThreeId != null">
+        #{categoryThreeId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryFourId != null">
+        #{categoryFourId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="specification != null">
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null">
+        #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="isProduction != null">
+        #{isProduction,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="managerName != null">
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseLink != null">
+        #{purchaseLink,jdbcType=VARCHAR},
+      </if>
+      <if test="samePurchaseLink != null">
+        #{samePurchaseLink,jdbcType=VARCHAR},
+      </if>
+      <if test="styleId != null">
+        #{styleId,jdbcType=INTEGER},
+      </if>
+      <if test="styleOne != null">
+        #{styleOne,jdbcType=VARCHAR},
+      </if>
+      <if test="styleTwo != null">
+        #{styleTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="styleThree != null">
+        #{styleThree,jdbcType=VARCHAR},
+      </if>
+      <if test="styleFour != null">
+        #{styleFour,jdbcType=VARCHAR},
+      </if>
+      <if test="styleFive != null">
+        #{styleFive,jdbcType=VARCHAR},
+      </if>
+      <if test="styleSix != null">
+        #{styleSix,jdbcType=VARCHAR},
+      </if>
+      <if test="styleSeven != null">
+        #{styleSeven,jdbcType=VARCHAR},
+      </if>
+      <if test="styleEight != null">
+        #{styleEight,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null">
+        #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="blockTime != null">
+        #{blockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.binger.goods.domain.GoodsExample" resultType="java.lang.Long">
+    select count(*) from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goods
+    <set>
+      <if test="record.goodsCode != null">
+        <if test="record.goodsCode == 'erpsetnull'">
+          goods_code= null,
+        </if>
+        <if test="record.goodsCode != 'erpsetnull'">
+          goods_code= #{record.goodsCode,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.goodsName != null">
+        <if test="record.goodsName == 'erpsetnull'">
+          goods_name= null,
+        </if>
+        <if test="record.goodsName != 'erpsetnull'">
+          goods_name= #{record.goodsName,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.goodsEnName != null">
+        <if test="record.goodsEnName == 'erpsetnull'">
+          goods_en_name= null,
+        </if>
+        <if test="record.goodsEnName != 'erpsetnull'">
+          goods_en_name= #{record.goodsEnName,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.mainImgUrl != null">
+        <if test="record.mainImgUrl == 'erpsetnull'">
+          main_img_url= null,
+        </if>
+        <if test="record.mainImgUrl != 'erpsetnull'">
+          main_img_url= #{record.mainImgUrl,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.specification != null">
+        <if test="record.specification == 'erpsetnull'">
+          specification= null,
+        </if>
+        <if test="record.specification != 'erpsetnull'">
+          specification= #{record.specification,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.model != null">
+        <if test="record.model == 'erpsetnull'">
+          model= null,
+        </if>
+        <if test="record.model != 'erpsetnull'">
+          model= #{record.model,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.material != null">
+        <if test="record.material == 'erpsetnull'">
+          material= null,
+        </if>
+        <if test="record.material != 'erpsetnull'">
+          material= #{record.material,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.managerName != null">
+        <if test="record.managerName == 'erpsetnull'">
+          manager_name= null,
+        </if>
+        <if test="record.managerName != 'erpsetnull'">
+          manager_name= #{record.managerName,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.purchaseLink != null">
+        <if test="record.purchaseLink == 'erpsetnull'">
+          purchase_link= null,
+        </if>
+        <if test="record.purchaseLink != 'erpsetnull'">
+          purchase_link= #{record.purchaseLink,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.samePurchaseLink != null">
+        <if test="record.samePurchaseLink == 'erpsetnull'">
+          same_purchase_link= null,
+        </if>
+        <if test="record.samePurchaseLink != 'erpsetnull'">
+          same_purchase_link= #{record.samePurchaseLink,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.styleOne != null">
+        <if test="record.styleOne == 'erpsetnull'">
+          style_one= null,
+        </if>
+        <if test="record.styleOne != 'erpsetnull'">
+          style_one= #{record.styleOne,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.styleTwo != null">
+        <if test="record.styleTwo == 'erpsetnull'">
+          style_two= null,
+        </if>
+        <if test="record.styleTwo != 'erpsetnull'">
+          style_two= #{record.styleTwo,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.styleThree != null">
+        <if test="record.styleThree == 'erpsetnull'">
+          style_three= null,
+        </if>
+        <if test="record.styleThree != 'erpsetnull'">
+          style_three= #{record.styleThree,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.styleFour != null">
+        <if test="record.styleFour == 'erpsetnull'">
+          style_four= null,
+        </if>
+        <if test="record.styleFour != 'erpsetnull'">
+          style_four= #{record.styleFour,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.styleFive != null">
+        <if test="record.styleFive == 'erpsetnull'">
+          style_five= null,
+        </if>
+        <if test="record.styleFive != 'erpsetnull'">
+          style_five= #{record.styleFive,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.styleSix != null">
+        <if test="record.styleSix == 'erpsetnull'">
+          style_six= null,
+        </if>
+        <if test="record.styleSix != 'erpsetnull'">
+          style_six= #{record.styleSix,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.styleSeven != null">
+        <if test="record.styleSeven == 'erpsetnull'">
+          style_seven= null,
+        </if>
+        <if test="record.styleSeven != 'erpsetnull'">
+          style_seven= #{record.styleSeven,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.styleEight != null">
+        <if test="record.styleEight == 'erpsetnull'">
+          style_eight= null,
+        </if>
+        <if test="record.styleEight != 'erpsetnull'">
+          style_eight= #{record.styleEight,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.creator != null">
+        <if test="record.creator == 'erpsetnull'">
+          creator= null,
+        </if>
+        <if test="record.creator != 'erpsetnull'">
+          creator= #{record.creator,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.modifier != null">
+        <if test="record.modifier == 'erpsetnull'">
+          modifier= null,
+        </if>
+        <if test="record.modifier != 'erpsetnull'">
+          modifier= #{record.modifier,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="record.categoryOneId != null">
+        <if test="record.categoryOneId == -99999">
+          category_one_id= null,
+        </if>
+        <if test="record.categoryOneId != -99999">
+          category_one_id= #{record.categoryOneId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="record.categoryTwoId != null">
+        <if test="record.categoryTwoId == -99999">
+          category_two_id= null,
+        </if>
+        <if test="record.categoryTwoId != -99999">
+          category_two_id= #{record.categoryTwoId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="record.categoryThreeId != null">
+        <if test="record.categoryThreeId == -99999">
+          category_three_id= null,
+        </if>
+        <if test="record.categoryThreeId != -99999">
+          category_three_id= #{record.categoryThreeId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="record.categoryFourId != null">
+        <if test="record.categoryFourId == -99999">
+          category_four_id= null,
+        </if>
+        <if test="record.categoryFourId != -99999">
+          category_four_id= #{record.categoryFourId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="record.brandId != null">
+        <if test="record.brandId == -99999">
+          brand_id= null,
+        </if>
+        <if test="record.brandId != -99999">
+          brand_id= #{record.brandId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="record.costPrice != null">
+        <if test="record.costPrice == -99999">
+          cost_price= null,
+        </if>
+        <if test="record.costPrice != -99999">
+          cost_price= #{record.costPrice,jdbcType=DECIMAL},
+        </if>
+      </if>
+      <if test="record.weight != null">
+        <if test="record.weight == -99999">
+          weight= null,
+        </if>
+        <if test="record.weight != -99999">
+          weight= #{record.weight,jdbcType=DECIMAL},
+        </if>
+      </if>
+      <if test="record.isProduction != null">
+        <if test="record.isProduction == -99999">
+          is_production= null,
+        </if>
+        <if test="record.isProduction != -99999">
+          is_production= #{record.isProduction,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="record.managerId != null">
+        <if test="record.managerId == -99999">
+          manager_id= null,
+        </if>
+        <if test="record.managerId != -99999">
+          manager_id= #{record.managerId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="record.styleId != null">
+        <if test="record.styleId == -99999">
+          style_id= null,
+        </if>
+        <if test="record.styleId != -99999">
+          style_id= #{record.styleId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="record.goodsType != null">
+        <if test="record.goodsType == -99999">
+          goods_type= null,
+        </if>
+        <if test="record.goodsType != -99999">
+          goods_type= #{record.goodsType,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="record.blockTime != null">
+        <if test="record.blockTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          block_time= null,
+        </if>
+        <if test="record.blockTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          block_time= #{record.blockTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="record.createTime != null">
+        <if test="record.createTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          create_time= null,
+        </if>
+        <if test="record.createTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          create_time= #{record.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="record.modifyTime != null">
+        <if test="record.modifyTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          modify_time= null,
+        </if>
+        <if test="record.modifyTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          modify_time= #{record.modifyTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="record.status != null">
+        status= #{record.status,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goods
+    set id = #{record.id,jdbcType=INTEGER},
+      goods_code = #{record.goodsCode,jdbcType=VARCHAR},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_en_name = #{record.goodsEnName,jdbcType=VARCHAR},
+      main_img_url = #{record.mainImgUrl,jdbcType=VARCHAR},
+      category_one_id = #{record.categoryOneId,jdbcType=INTEGER},
+      category_two_id = #{record.categoryTwoId,jdbcType=INTEGER},
+      category_three_id = #{record.categoryThreeId,jdbcType=INTEGER},
+      category_four_id = #{record.categoryFourId,jdbcType=INTEGER},
+      brand_id = #{record.brandId,jdbcType=INTEGER},
+      cost_price = #{record.costPrice,jdbcType=DECIMAL},
+      weight = #{record.weight,jdbcType=DECIMAL},
+      specification = #{record.specification,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      material = #{record.material,jdbcType=VARCHAR},
+      is_production = #{record.isProduction,jdbcType=INTEGER},
+      manager_id = #{record.managerId,jdbcType=INTEGER},
+      manager_name = #{record.managerName,jdbcType=VARCHAR},
+      purchase_link = #{record.purchaseLink,jdbcType=VARCHAR},
+      same_purchase_link = #{record.samePurchaseLink,jdbcType=VARCHAR},
+      style_id = #{record.styleId,jdbcType=INTEGER},
+      style_one = #{record.styleOne,jdbcType=VARCHAR},
+      style_two = #{record.styleTwo,jdbcType=VARCHAR},
+      style_three = #{record.styleThree,jdbcType=VARCHAR},
+      style_four = #{record.styleFour,jdbcType=VARCHAR},
+      style_five = #{record.styleFive,jdbcType=VARCHAR},
+      style_six = #{record.styleSix,jdbcType=VARCHAR},
+      style_seven = #{record.styleSeven,jdbcType=VARCHAR},
+      style_eight = #{record.styleEight,jdbcType=VARCHAR},
+      goods_type = #{record.goodsType,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=BIT},
+      block_time = #{record.blockTime,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.binger.goods.domain.Goods">
+    update goods
+    <set>
+      <if test="goodsCode != null">
+        <if test="goodsCode == 'erpsetnull'">
+          goods_code= null,
+        </if>
+        <if test="goodsCode != 'erpsetnull'">
+          goods_code= #{goodsCode,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="goodsName != null">
+        <if test="goodsName == 'erpsetnull'">
+          goods_name= null,
+        </if>
+        <if test="goodsName != 'erpsetnull'">
+          goods_name= #{goodsName,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="goodsEnName != null">
+        <if test="goodsEnName == 'erpsetnull'">
+          goods_en_name= null,
+        </if>
+        <if test="goodsEnName != 'erpsetnull'">
+          goods_en_name= #{goodsEnName,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="mainImgUrl != null">
+        <if test="mainImgUrl == 'erpsetnull'">
+          main_img_url= null,
+        </if>
+        <if test="mainImgUrl != 'erpsetnull'">
+          main_img_url= #{mainImgUrl,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="specification != null">
+        <if test="specification == 'erpsetnull'">
+          specification= null,
+        </if>
+        <if test="specification != 'erpsetnull'">
+          specification= #{specification,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="model != null">
+        <if test="model == 'erpsetnull'">
+          model= null,
+        </if>
+        <if test="model != 'erpsetnull'">
+          model= #{model,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="material != null">
+        <if test="material == 'erpsetnull'">
+          material= null,
+        </if>
+        <if test="material != 'erpsetnull'">
+          material= #{material,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="managerName != null">
+        <if test="managerName == 'erpsetnull'">
+          manager_name= null,
+        </if>
+        <if test="managerName != 'erpsetnull'">
+          manager_name= #{managerName,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="purchaseLink != null">
+        <if test="purchaseLink == 'erpsetnull'">
+          purchase_link= null,
+        </if>
+        <if test="purchaseLink != 'erpsetnull'">
+          purchase_link= #{purchaseLink,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="samePurchaseLink != null">
+        <if test="samePurchaseLink == 'erpsetnull'">
+          same_purchase_link= null,
+        </if>
+        <if test="samePurchaseLink != 'erpsetnull'">
+          same_purchase_link= #{samePurchaseLink,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="styleOne != null">
+        <if test="styleOne == 'erpsetnull'">
+          style_one= null,
+        </if>
+        <if test="styleOne != 'erpsetnull'">
+          style_one= #{styleOne,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="styleTwo != null">
+        <if test="styleTwo == 'erpsetnull'">
+          style_two= null,
+        </if>
+        <if test="styleTwo != 'erpsetnull'">
+          style_two= #{styleTwo,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="styleThree != null">
+        <if test="styleThree == 'erpsetnull'">
+          style_three= null,
+        </if>
+        <if test="styleThree != 'erpsetnull'">
+          style_three= #{styleThree,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="styleFour != null">
+        <if test="styleFour == 'erpsetnull'">
+          style_four= null,
+        </if>
+        <if test="styleFour != 'erpsetnull'">
+          style_four= #{styleFour,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="styleFive != null">
+        <if test="styleFive == 'erpsetnull'">
+          style_five= null,
+        </if>
+        <if test="styleFive != 'erpsetnull'">
+          style_five= #{styleFive,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="styleSix != null">
+        <if test="styleSix == 'erpsetnull'">
+          style_six= null,
+        </if>
+        <if test="styleSix != 'erpsetnull'">
+          style_six= #{styleSix,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="styleSeven != null">
+        <if test="styleSeven == 'erpsetnull'">
+          style_seven= null,
+        </if>
+        <if test="styleSeven != 'erpsetnull'">
+          style_seven= #{styleSeven,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="styleEight != null">
+        <if test="styleEight == 'erpsetnull'">
+          style_eight= null,
+        </if>
+        <if test="styleEight != 'erpsetnull'">
+          style_eight= #{styleEight,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="creator != null">
+        <if test="creator == 'erpsetnull'">
+          creator= null,
+        </if>
+        <if test="creator != 'erpsetnull'">
+          creator= #{creator,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="modifier != null">
+        <if test="modifier == 'erpsetnull'">
+          modifier= null,
+        </if>
+        <if test="modifier != 'erpsetnull'">
+          modifier= #{modifier,jdbcType=VARCHAR},
+        </if>
+      </if>
+      <if test="categoryOneId != null">
+        <if test="categoryOneId == -99999">
+          category_one_id= null,
+        </if>
+        <if test="categoryOneId != -99999">
+          category_one_id= #{categoryOneId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="categoryTwoId != null">
+        <if test="categoryTwoId == -99999">
+          category_two_id= null,
+        </if>
+        <if test="categoryTwoId != -99999">
+          category_two_id= #{categoryTwoId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="categoryThreeId != null">
+        <if test="categoryThreeId == -99999">
+          category_three_id= null,
+        </if>
+        <if test="categoryThreeId != -99999">
+          category_three_id= #{categoryThreeId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="categoryFourId != null">
+        <if test="categoryFourId == -99999">
+          category_four_id= null,
+        </if>
+        <if test="categoryFourId != -99999">
+          category_four_id= #{categoryFourId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="brandId != null">
+        <if test="brandId == -99999">
+          brand_id= null,
+        </if>
+        <if test="brandId != -99999">
+          brand_id= #{brandId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="costPrice != null">
+        <if test="costPrice == -99999">
+          cost_price= null,
+        </if>
+        <if test="costPrice != -99999">
+          cost_price= #{costPrice,jdbcType=DECIMAL},
+        </if>
+      </if>
+      <if test="weight != null">
+        <if test="weight == -99999">
+          weight= null,
+        </if>
+        <if test="weight != -99999">
+          weight= #{weight,jdbcType=DECIMAL},
+        </if>
+      </if>
+      <if test="isProduction != null">
+        <if test="isProduction == -99999">
+          is_production= null,
+        </if>
+        <if test="isProduction != -99999">
+          is_production= #{isProduction,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="managerId != null">
+        <if test="managerId == -99999">
+          manager_id= null,
+        </if>
+        <if test="managerId != -99999">
+          manager_id= #{managerId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="styleId != null">
+        <if test="styleId == -99999">
+          style_id= null,
+        </if>
+        <if test="styleId != -99999">
+          style_id= #{styleId,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="goodsType != null">
+        <if test="goodsType == -99999">
+          goods_type= null,
+        </if>
+        <if test="goodsType != -99999">
+          goods_type= #{goodsType,jdbcType=INTEGER},
+        </if>
+      </if>
+      <if test="blockTime != null">
+        <if test="blockTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          block_time= null,
+        </if>
+        <if test="blockTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          block_time= #{blockTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="createTime != null">
+        <if test="createTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          create_time= null,
+        </if>
+        <if test="createTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          create_time= #{createTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="modifyTime != null">
+        <if test="modifyTime.toString() == 'Thu Jan 01 08:00:00 CST 1970'">
+          modify_time= null,
+        </if>
+        <if test="modifyTime.toString() != 'Thu Jan 01 08:00:00 CST 1970'">
+          modify_time= #{modifyTime,jdbcType=TIMESTAMP},
+        </if>
+      </if>
+      <if test="status != null">
+        status= #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.binger.goods.domain.Goods">
+    update goods
+    set goods_code = #{goodsCode,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_en_name = #{goodsEnName,jdbcType=VARCHAR},
+      main_img_url = #{mainImgUrl,jdbcType=VARCHAR},
+      category_one_id = #{categoryOneId,jdbcType=INTEGER},
+      category_two_id = #{categoryTwoId,jdbcType=INTEGER},
+      category_three_id = #{categoryThreeId,jdbcType=INTEGER},
+      category_four_id = #{categoryFourId,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      cost_price = #{costPrice,jdbcType=DECIMAL},
+      weight = #{weight,jdbcType=DECIMAL},
+      specification = #{specification,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      material = #{material,jdbcType=VARCHAR},
+      is_production = #{isProduction,jdbcType=INTEGER},
+      manager_id = #{managerId,jdbcType=INTEGER},
+      manager_name = #{managerName,jdbcType=VARCHAR},
+      purchase_link = #{purchaseLink,jdbcType=VARCHAR},
+      same_purchase_link = #{samePurchaseLink,jdbcType=VARCHAR},
+      style_id = #{styleId,jdbcType=INTEGER},
+      style_one = #{styleOne,jdbcType=VARCHAR},
+      style_two = #{styleTwo,jdbcType=VARCHAR},
+      style_three = #{styleThree,jdbcType=VARCHAR},
+      style_four = #{styleFour,jdbcType=VARCHAR},
+      style_five = #{styleFive,jdbcType=VARCHAR},
+      style_six = #{styleSix,jdbcType=VARCHAR},
+      style_seven = #{styleSeven,jdbcType=VARCHAR},
+      style_eight = #{styleEight,jdbcType=VARCHAR},
+      goods_type = #{goodsType,jdbcType=INTEGER},
+      status = #{status,jdbcType=BIT},
+      block_time = #{blockTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithColSelected" parameterType="com.binger.goods.domain.GoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    ${selectiveField.toString()} 
+    from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKeyWithColSelected" resultMap="BaseResultMap">
+    select 
+    ${selectiveField.toString()} 
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

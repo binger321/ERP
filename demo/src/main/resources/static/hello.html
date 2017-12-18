@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="js/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#getBtn").click(function(){
+                $.ajax({
+                    type:"GET",
+                    url:"/WebDemo/servlet/AjaxDemoServlet",
+                    dataType:"json",
+                    success:function(data){
+                        $("#data").html(data.name + '的任务是' + data.task);
+                    },
+                    error:function(data){
+                        $("#data").html("发生错误:"+data.status);
+                    }
+                });
+            });
+
+            $("#postBtn").click(function(){
+                $.ajax({
+                    type:"POST",
+                    url:"/WebDemo/servlet/AjaxDemoServlet",
+                    data:{
+                        username:$("#username").val(),
+                        password:$("#password").val(),
+                    },
+                    dataType:"json",
+                    success:function(data){
+                        if(data.state){
+                            $("#test").html(data.msg);
+                        }else{
+                            $("#test").html("验证未通过:"+ data.msg);
+                        }
+                    },
+                    error:function(data){
+                        $("#test").html("发生错误:"+data.status);
+                    }
+                });
+            });
+            $("#helloBtn").click(function(){
+                $.ajax({
+                    url:'http://localhost:8080/sayHello',
+                    type:'POST',
+                    dataType:"json",
+                    data:{
+                        name:$("#name").val(),
+                    },
+                    success:function(data){
+                        if(data.status){
+                            $("#data2").html(data.data);
+                        }else{
+                            $("#data2").html("验证未通过:"+ data.data);
+                        }
+                    },
+                    error:function(data){
+                        $("#data2").html("发生错误:"+data.status);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div>
+    <button id="getBtn">GET</button>
+    <div id="data"></div>
+</div>
+<br>
+<div>
+    <div>
+        <span>用户名</span>
+        <input type="text" id="username">
+    </div>
+    <div>
+        <span>密　码</span>
+        <input type="text" id="password">
+    </div>
+    <button id="postBtn">POST</button>
+    <div id="test"></div>
+</div>
+<div>
+    <span>name</span>
+    <input type="text" id="name">
+    <button id="helloBtn">说话</button>
+    <div id="data2"></div>
+</div>
+
+
+</body>
+</html>
