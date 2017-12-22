@@ -9,56 +9,50 @@ import java.util.Date;
 /**
  * Created with IntelliJ IDEA.
  * User: zhuyubin
- * Date: 2017/12/14 0014
- * Time: 21:08
+ * Date: 2017/12/19 0019
+ * Time: 17:06
  * To change this template use File | Settings | File Templates.
  * Description:
  */
 @Data
-@ApiModel(value = "品牌信息Form")
-public class GoodsBrandForm {
+@ApiModel("图片Form")
+public class GoodsImgForm {
 
     /**
-     * 品牌编码
+     * 商品ID
      */
-    @ApiModelProperty(value="品牌编码",required = true)
-    private String brandCode;
+    @ApiModelProperty(value="商品ID",required = true)
+    private Integer goodsId;
 
     /**
-     * 品牌名称
+     * 图片编码
      */
-    @ApiModelProperty(value="品牌名称",required = true)
-    private String brandName;
+    @ApiModelProperty(value="图片编码",required = true)
+    private String imgCode;
 
     /**
-     * 国家编码
+     * 图号
      */
-    @ApiModelProperty(value="国家编码",required = false)
-    private String countryCode;
+    @ApiModelProperty(value="图号",required = true)
+    private String imgNo;
 
     /**
-     * 国家名称
+     * 图片URL
      */
-    @ApiModelProperty(value="国家名称",required = false)
-    private String countryName;
+    @ApiModelProperty(value="图片URL",required = true)
+    private String imgUrl;
 
     /**
-     * 备注
+     * 是否主图
      */
-    @ApiModelProperty(value="备注",required = false)
-    private String remark;
+    @ApiModelProperty(value="是否主图",required = false)
+    private Boolean isMain;
 
     /**
      * 0禁用, 1启用
      */
     @ApiModelProperty(value="0禁用, 1启用",required = false)
     private Boolean status;
-
-    /**
-     * 停用时间
-     */
-    @ApiModelProperty(value="停用时间",required = false)
-    private Date blockTime;
 
     /**
      * 创建人

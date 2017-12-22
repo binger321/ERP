@@ -9,38 +9,32 @@ import java.util.Date;
 /**
  * Created with IntelliJ IDEA.
  * User: zhuyubin
- * Date: 2017/12/14 0014
- * Time: 21:08
+ * Date: 2017/12/19 0019
+ * Time: 17:09
  * To change this template use File | Settings | File Templates.
  * Description:
  */
 @Data
-@ApiModel(value = "品牌信息Form")
-public class GoodsBrandForm {
+@ApiModel("尺寸Form")
+public class GoodsSizeForm {
 
     /**
-     * 品牌编码
+     * 尺寸编码
      */
-    @ApiModelProperty(value="品牌编码",required = true)
-    private String brandCode;
+    @ApiModelProperty(value="尺寸编码",required = true)
+    private String sizeCode;
 
     /**
-     * 品牌名称
+     * 尺寸名称
      */
-    @ApiModelProperty(value="品牌名称",required = true)
-    private String brandName;
+    @ApiModelProperty(value="尺寸名称",required = true)
+    private String sizeName;
 
     /**
-     * 国家编码
+     *
      */
-    @ApiModelProperty(value="国家编码",required = false)
-    private String countryCode;
-
-    /**
-     * 国家名称
-     */
-    @ApiModelProperty(value="国家名称",required = false)
-    private String countryName;
+    @ApiModelProperty(value="",required = true)
+    private String sizeShortName;
 
     /**
      * 备注
@@ -51,7 +45,7 @@ public class GoodsBrandForm {
     /**
      * 0禁用, 1启用
      */
-    @ApiModelProperty(value="0禁用, 1启用",required = false)
+    @ApiModelProperty(value="0禁用, 1启用",required = true)
     private Boolean status;
 
     /**

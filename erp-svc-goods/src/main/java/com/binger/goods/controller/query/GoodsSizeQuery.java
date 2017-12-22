@@ -1,4 +1,4 @@
-package com.binger.goods.controller.form;
+package com.binger.goods.controller.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,38 +9,37 @@ import java.util.Date;
 /**
  * Created with IntelliJ IDEA.
  * User: zhuyubin
- * Date: 2017/12/14 0014
- * Time: 21:08
+ * Date: 2017/12/19 0019
+ * Time: 17:09
  * To change this template use File | Settings | File Templates.
  * Description:
  */
 @Data
-@ApiModel(value = "品牌信息Form")
-public class GoodsBrandForm {
+@ApiModel("尺寸Query")
+public class GoodsSizeQuery {
+    /**
+     * ID
+     */
+    @ApiModelProperty(value="ID",required = false)
+    private Integer id;
 
     /**
-     * 品牌编码
+     * 尺寸编码
      */
-    @ApiModelProperty(value="品牌编码",required = true)
-    private String brandCode;
+    @ApiModelProperty(value="尺寸编码",required = false)
+    private String sizeCode;
 
     /**
-     * 品牌名称
+     * 尺寸名称
      */
-    @ApiModelProperty(value="品牌名称",required = true)
-    private String brandName;
+    @ApiModelProperty(value="尺寸名称",required = false)
+    private String sizeName;
 
     /**
-     * 国家编码
+     *
      */
-    @ApiModelProperty(value="国家编码",required = false)
-    private String countryCode;
-
-    /**
-     * 国家名称
-     */
-    @ApiModelProperty(value="国家名称",required = false)
-    private String countryName;
+    @ApiModelProperty(value="",required = false)
+    private String sizeShortName;
 
     /**
      * 备注

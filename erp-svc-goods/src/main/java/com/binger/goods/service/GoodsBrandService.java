@@ -1,6 +1,10 @@
 package com.binger.goods.service;
 
+import com.binger.goods.domain.GoodsBrand;
 import com.binger.goods.domain.GoodsBrandExample;
+import com.binger.goods.vo.GoodsBrandVo;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,5 +22,11 @@ public interface GoodsBrandService {
      */
     Long countGoodsBrand(GoodsBrandExample goodsBrandExample);
 
+    /**
+     * 列出所有商品品牌
+     * @param goodsBrandExample
+     * @return
+     */
+    List<GoodsBrandVo> listGoodsBrand(GoodsBrandExample goodsBrandExample);
 
 }

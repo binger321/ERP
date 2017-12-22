@@ -1,46 +1,35 @@
-package com.binger.goods.controller.form;
+package com.binger.goods.vo;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
  * User: zhuyubin
- * Date: 2017/12/14 0014
- * Time: 21:08
+ * Date: 2017/12/19 0019
+ * Time: 11:40
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-@Data
-@ApiModel(value = "品牌信息Form")
-public class GoodsBrandForm {
+public class GoodsStyleDetailVo {
+    /**
+     * ID
+     */
+    @ApiModelProperty(value="ID",required = true)
+    private Integer id;
 
     /**
-     * 品牌编码
+     * 款式编码
      */
-    @ApiModelProperty(value="品牌编码",required = true)
-    private String brandCode;
+    @ApiModelProperty(value="款式编码",required = true)
+    private String styleCode;
 
     /**
-     * 品牌名称
+     * 款式名称
      */
-    @ApiModelProperty(value="品牌名称",required = true)
-    private String brandName;
-
-    /**
-     * 国家编码
-     */
-    @ApiModelProperty(value="国家编码",required = false)
-    private String countryCode;
-
-    /**
-     * 国家名称
-     */
-    @ApiModelProperty(value="国家名称",required = false)
-    private String countryName;
+    @ApiModelProperty(value="款式名称",required = true)
+    private String styleName;
 
     /**
      * 备注

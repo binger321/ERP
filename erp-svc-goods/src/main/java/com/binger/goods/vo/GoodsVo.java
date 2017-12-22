@@ -1,6 +1,8 @@
 package com.binger.goods.vo;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
@@ -12,6 +14,8 @@ import java.math.BigDecimal;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
+@Data
+@ApiModel("商品详情")
 public class GoodsVo {
     /**
      * ID

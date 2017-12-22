@@ -1,22 +1,20 @@
-package com.binger.goods.vo;
+package com.binger.goods.controller.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  * User: zhuyubin
- * Date: 2017/12/14 0014
- * Time: 21:05
+ * Date: 2017/12/18 0018
+ * Time: 15:37
  * To change this template use File | Settings | File Templates.
  * Description:
  */
 @Data
-@ApiModel("商品品牌VO")
-public class GoodsBrandVo {
+@ApiModel(value = "商品品牌Query")
+public class GoodsBrandQuery {
     /**
      * ID
      */
@@ -46,17 +44,5 @@ public class GoodsBrandVo {
      */
     @ApiModelProperty(value="国家名称")
     private String countryName;
-
-    /**
-     * 备注
-     */
-    @ApiModelProperty(value="备注")
-    private String remark;
-
-    /**
-     * 0禁用, 1启用
-     */
-    @ApiModelProperty(value="0禁用, 1启用")
-    private Boolean status;
 
 }

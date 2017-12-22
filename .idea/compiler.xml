@@ -14,14 +14,12 @@
         <module name="eureka" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="common-util" target="1.8" />
-      <module name="commonutil" target="1.5" />
       <module name="demo" target="1.8" />
       <module name="erp-svc-eureka" target="1.8" />
       <module name="erp-svc-goods" target="1.8" />
       <module name="eureka" target="1.8" />
-      <module name="goods" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
