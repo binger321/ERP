@@ -2,6 +2,7 @@ package com.binger.goods.service;
 
 import com.binger.goods.controller.form.GoodsForm;
 import com.binger.goods.domain.GoodsExample;
+import com.binger.goods.dto.query.GoodsIndexListQueryDto;
 import com.binger.goods.vo.GoodsDetailVo;
 import com.binger.goods.vo.GoodsVo;
 
@@ -18,17 +19,17 @@ import java.util.List;
 public interface GoodsService {
     /**
      * 计算所有商品的数量
-     * @param goodsExample
+     * @param goodsIndexListQueryDto
      * @return
      */
-    Long countGoods(GoodsExample goodsExample);
+    Long countGoods(GoodsIndexListQueryDto goodsIndexListQueryDto);
 
     /**
      * 列出所有商品信息
-     * @param goodsExample
+     * @param goodsIndexListQueryDto
      * @return
      */
-    List<GoodsVo> listGoodsVo(GoodsExample goodsExample);
+    List<GoodsVo> listGoodsVo(GoodsIndexListQueryDto goodsIndexListQueryDto);
 
     /**
      * 根据id查询商品详细信息

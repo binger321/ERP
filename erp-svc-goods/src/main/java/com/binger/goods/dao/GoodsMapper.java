@@ -2,6 +2,8 @@ package com.binger.goods.dao;
 
 import com.binger.goods.domain.Goods;
 import com.binger.goods.domain.GoodsExample;
+import com.binger.goods.dto.query.GoodsIndexListQueryDto;
+import com.binger.goods.dto.ret.GoodsIndexDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -32,4 +34,8 @@ public interface GoodsMapper {
     int updateByPrimaryKeySelective(Goods record);
 
     int updateByPrimaryKey(Goods record);
+
+    Long countGoodsIndexDto(@Param("queryDto") GoodsIndexListQueryDto goodsIndexListQueryDto);
+
+    List<GoodsIndexDto> listGoodsIndex(@Param("queryDto") GoodsIndexListQueryDto goodsIndexListQueryDto);
 }

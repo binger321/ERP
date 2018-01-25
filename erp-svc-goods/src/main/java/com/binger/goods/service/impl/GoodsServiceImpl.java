@@ -5,6 +5,8 @@ import com.binger.goods.controller.form.GoodsForm;
 import com.binger.goods.dao.GoodsMapper;
 import com.binger.goods.domain.Goods;
 import com.binger.goods.domain.GoodsExample;
+import com.binger.goods.dto.query.GoodsIndexListQueryDto;
+import com.binger.goods.dto.ret.GoodsIndexDto;
 import com.binger.goods.service.GoodsService;
 import com.binger.goods.vo.GoodsDetailVo;
 import com.binger.goods.vo.GoodsVo;
@@ -27,16 +29,18 @@ public class GoodsServiceImpl implements GoodsService{
     private GoodsMapper goodsMapper;
 
     @Override
-    public Long countGoods(GoodsExample goodsExample) {
-        return goodsMapper.countByExample(goodsExample);
+    public Long countGoods(GoodsIndexListQueryDto goodsIndexListQueryDto) {
+        return goodsMapper.countGoodsIndexDto(goodsIndexListQueryDto);
 
     }
 
     @Override
-    public List<GoodsVo> listGoodsVo(GoodsExample goodsExample) {
-        List<Goods> goodsList=goodsMapper.selectByExample(goodsExample);
-        if (CollectionUtils.isNotEmpty(goodsList)){
-            return DozerUtils.convertList(goodsList,GoodsVo.class);
+    public List<GoodsVo> listGoodsVo(GoodsIndexListQueryDto goodsIndexListQueryDto) {
+        List<GoodsIndexDto> goodsIndexDtoList=goodsMapper.listGoodsIndex(goodsIndexListQueryDto);
+        if (CollectionUtils.isNotEmpty(goodsIndexDtoList)){
+            List<GoodsVo> goodsVoList = DozerUtils.convertList(goodsIndexDtoList,GoodsVo.class);
+            goodsIndexDtoList.clear();
+            return goodsVoList;
         }
         return null;
     }

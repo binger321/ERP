@@ -7,6 +7,7 @@ import com.binger.common.util.DozerUtils;
 import com.binger.goods.controller.form.GoodsForm;
 import com.binger.goods.controller.query.GoodsQuery;
 import com.binger.goods.domain.GoodsExample;
+import com.binger.goods.dto.query.GoodsIndexListQueryDto;
 import com.binger.goods.service.GoodsService;
 import com.binger.goods.vo.GoodsDetailVo;
 import com.binger.goods.vo.GoodsVo;
@@ -47,19 +48,19 @@ public class GoodsController {
      */
     @ApiOperation(value="商品列表")
     @RequestMapping(value = "/listGoods",method = RequestMethod.POST)
-    public ServerResponse<List<GoodsVo>> listGoodsVo(@RequestBody(required = false)GoodsQuery goodsQuery,
-                                                     @RequestParam(name = "pageNo",required = false) Integer pageNo,
-                                                     @RequestParam(name = "pageSize",required = false) Integer pageSize){
-        GoodsExample goodsExample= DozerUtils.convert(goodsQuery,GoodsExample.class);
+    public ServerResponse<List<GoodsVo>> listGoodsVo(@RequestBody(required = false) GoodsQuery goodsQuery,
+                                                     @RequestParam(name = "pageNo", required = false) Integer pageNo,
+                                                     @RequestParam(name = "pageSize", required = false) Integer pageSize){
+        GoodsIndexListQueryDto goodsIndexListQueryDto= DozerUtils.convert(goodsQuery,GoodsIndexListQueryDto.class);
         if(pageNo != null){
-            Long total = goodsService.countGoods(goodsExample);
+            Long total = goodsService.countGoods(goodsIndexListQueryDto);
             Page page = new Page(pageNo,pageSize,total);
-            goodsExample.setOffset(page.getOffset());
-            goodsExample.setLimit(page.getPageSize());
-            List<GoodsVo> goodsVoList=goodsService.listGoodsVo(goodsExample);
+            goodsIndexListQueryDto.setOffset(page.getOffset());
+            goodsIndexListQueryDto.setLimit(page.getPageSize());
+            List<GoodsVo> goodsVoList=goodsService.listGoodsVo(goodsIndexListQueryDto);
             return ServerResponse.createBySuccess(Const.SUCCESS_MSG,goodsVoList);
         }else {
-            List<GoodsVo> goodsVoList=goodsService.listGoodsVo(goodsExample);
+            List<GoodsVo> goodsVoList=goodsService.listGoodsVo(goodsIndexListQueryDto);
             return ServerResponse.createBySuccess(Const.SUCCESS_MSG,goodsVoList);
         }
 

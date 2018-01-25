@@ -1,3 +1,97 @@
-package mapper
-
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.binger.goods.dao.GoodsMapper">
+    <resultMap id="GoodsIndexDto" type="com.binger.goods.dto.ret.GoodsIndexDto">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="goods_code" jdbcType="VARCHAR" property="goodsCode"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+        <result column="goods_type" jdbcType="INTEGER" property="goodsType"/>
+        <result column="main_img_url" jdbcType="VARCHAR" property="mainImgUrl"/>
+        <result column="brand_id" jdbcType="INTEGER" property="brandId"/>
+        <result column="brand_name" jdbcType="VARCHAR" property="brandName"/>
+        <result column="weight" jdbcType="DECIMAL" property="weight"/>
+        <result column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
+        <result column="supplier_name" jdbcType="VARCHAR" property="supplierName"/>
+        <result column="cost_price" jdbcType="DECIMAL" property="costPrice"/>
+        <result column="is_production" jdbcType="INTEGER" property="isProduction"/>
+    </resultMap>
+    <sql id="GoodsIndexQueryDto_Where_Clause">
+        <where>
+            g.status = TRUE
+            <if test="queryDto.goodsCode != null and queryDto.goodsCode != ''">
+                AND g.goods_code LIKE '%${queryDto.goodsCode}%'
+            </if>
+            <if test="queryDto.goodsCodeList != null and queryDto.goodsCodeList.size() > 0">
+                AND g.goods_code IN
+                <foreach collection="queryDto.goodsCodeList" item="goodsCode" open="(" separator="," close=")">
+                    ${goodsCode}
+                </foreach>
+            </if>
+            <if test="queryDto.goodsName != null and queryDto.goodsName != ''">
+                AND g.goods_name = ${queryDto.goodsName}
+            </if>
+            <if test="queryDto.goodsType != null">
+                AND g.goods_type = ${queryDto.goodsType}
+            </if>
+            <if test="queryDto.skuCode != null and queryDto.skuCode != ''">
+                AND sku.sku_code LIKE '%${queryDto.skuCode}%'
+            </if>
+            <if test="queryDto.skuCodeList != null and queryDto.skuCodeList.size() > 0">
+                AND sku.sku_code IN
+                <foreach collection="queryDto.skuCodeList" item="skuCode" open="(" close=")" separator=",">
+                    ${skuCode}
+                </foreach>
+            </if>
+            <if test="queryDto.categoryOneId != null">
+                AND g.category_one_id = ${queryDto.categoryOndId}
+            </if>
+            <if test="queryDto.categoryTwoId != null">
+                AND g.category_two_id = ${queryDto.categoryTwoId}
+            </if>
+            <if test="queryDto.categoryThreeId != null">
+                AND g.category_three_id = ${queryDto.categoryThreeId}
+            </if>
+            <if test="queryDto.categoryFourId != null">
+                AND g.category_four_id = ${queryDto.categoryFourId}
+            </if>
+            <if test="queryDto.brandId != null">
+                AND g.brand_id = ${queryDto.brandId}
+            </if>
+            <if test="queryDto.supplierId != null">
+                AND s.supplier_id = ${queryDto.supplierId}
+            </if>
+            <if test="queryDto.isProduction != null">
+                AND g.is_production = ${queryDto.isProduction}
+            </if>
+        </where>
+    </sql>
+    <select id="countGoodsIndexDto" parameterType="com.binger.goods.dto.query.GoodsIndexListQueryDto" resultType="long">
+        SELECT COUNT(1)
+        FROM goods g
+        LEFT JOIN goods_sku sku ON g.id = sku.good_id
+        LEFT JOIN goods_supplier s ON g.id = s.goods_id
+        <include refid="GoodsIndexQueryDto_Where_Clause"/>
+        GROUP BY g.id;
+    </select>
+    <select id="listGoodsIndex" parameterType="com.binger.goods.dto.query.GoodsIndexListQueryDto" resultMap="GoodsIndexDto">
+        SELECT
+        g.id,
+        g.goods_code,
+        g.goods_name,
+        g.goods_Type,
+        g.main_img_url,
+        g.brand_id,
+        brand.brand_name,
+        g.weight,
+        s.supplier_id,
+        s.supplier_name,
+        g.cost_price,
+        g.is_production
+        FROM goods g
+        LEFT JOIN goods_sku sku ON g.id = sku.goods_id
+        LEFT JOIN goods_brand brand ON g.brand_id = brand.id
+        LEFT JOIN goods_supplier s ON g.id = s.goods_id
+        <include refid="GoodsIndexQueryDto_Where_Clause"/>
+        GROUP BY g.id;
+    </select>
+</mapper>
