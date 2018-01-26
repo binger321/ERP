@@ -63,6 +63,14 @@
             <if test="queryDto.isProduction != null">
                 AND g.is_production = ${queryDto.isProduction}
             </if>
+            <if test="queryDto.limit != null">
+                <if test="queryDto.offset != null">
+                    limit ${queryDto.offset}, ${queryDto.limit}
+                </if>
+                <if test="queryDto.offset == null">
+                    limit ${queryDto.limit}
+                </if>
+            </if>
         </where>
     </sql>
     <select id="countGoodsIndexDto" parameterType="com.binger.goods.dto.query.GoodsIndexListQueryDto" resultType="long">

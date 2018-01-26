@@ -4,6 +4,8 @@ import com.binger.common.Const;
 import com.binger.common.Page;
 import com.binger.common.ServerResponse;
 import com.binger.common.util.DozerUtils;
+import com.binger.common.util.QueryUtils;
+import com.binger.common.vo.SplitStringVo;
 import com.binger.goods.controller.form.GoodsForm;
 import com.binger.goods.controller.query.GoodsQuery;
 import com.binger.goods.domain.GoodsExample;
@@ -13,6 +15,7 @@ import com.binger.goods.vo.GoodsDetailVo;
 import com.binger.goods.vo.GoodsVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +55,16 @@ public class GoodsController {
                                                      @RequestParam(name = "pageNo", required = false) Integer pageNo,
                                                      @RequestParam(name = "pageSize", required = false) Integer pageSize){
         GoodsIndexListQueryDto goodsIndexListQueryDto= DozerUtils.convert(goodsQuery,GoodsIndexListQueryDto.class);
+        if (StringUtils.isNotBlank(goodsQuery.getGoodsCode())){
+            SplitStringVo splitStringVo = QueryUtils.stringStringWhenQuery(goodsQuery.getGoodsCode());
+            goodsIndexListQueryDto.setGoodsCode(splitStringVo.getSingleValue());
+            goodsIndexListQueryDto.setGoodsCodeList(splitStringVo.getListValue());
+        }
+        if (StringUtils.isNotBlank(goodsQuery.getSkuCode())){
+            SplitStringVo splitStringVo = QueryUtils.stringStringWhenQuery(goodsQuery.getSkuCode());
+            goodsIndexListQueryDto.setSkuCode(splitStringVo.getSingleValue());
+            goodsIndexListQueryDto.setSkuCodeList(splitStringVo.getListValue());
+        }
         if(pageNo != null){
             Long total = goodsService.countGoods(goodsIndexListQueryDto);
             Page page = new Page(pageNo,pageSize,total);
