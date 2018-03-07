@@ -10,6 +10,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -22,8 +23,12 @@ import java.util.List;
  */
 @Service
 public class GoodsBrandServiceImpl implements GoodsBrandService {
+
+
     @Autowired
     GoodsBrandMapper goodsBrandMapper;
+
+
     @Override
     public Long countGoodsBrand(GoodsBrandExample goodsBrandExample) {
         return goodsBrandMapper.countByExample(goodsBrandExample);
@@ -37,5 +42,66 @@ public class GoodsBrandServiceImpl implements GoodsBrandService {
         }
         return null;
     }
+
+    @Override
+    public GoodsBrandVo findBrandById(Integer id) {
+        GoodsBrand goodsBrand = goodsBrandMapper.selectByPrimaryKey(id);
+        GoodsBrandVo goodsBrandVo = DozerUtils.convert(goodsBrand, GoodsBrandVo.class);
+        return goodsBrandVo;
+    }
+
+    @Override
+    public GoodsBrandVo addGoodsBrand(GoodsBrand goodsBrand) {
+        long count = goodsBrandMapper.insertSelective(goodsBrand);
+        if (count > 0){
+            GoodsBrand brand = goodsBrandMapper.selectByPrimaryKey(goodsBrand.getId());
+            return DozerUtils.convert(brand, GoodsBrandVo.class);
+        }
+        return null;
+    }
+
+    @Override
+    public long checkBrandCode(String code, Integer id) {
+        GoodsBrandExample goodsBrandExample = new GoodsBrandExample();
+        GoodsBrandExample.Criteria criteria = goodsBrandExample.createCriteria();
+        criteria.andBrandCodeEqualTo(code);
+        if (id != null){
+            criteria.andIdNotEqualTo(id);
+        }
+        return goodsBrandMapper.countByExample(goodsBrandExample);
+    }
+
+    @Override
+    public GoodsBrandVo updateGoodsBrand(GoodsBrand goodsBrand) {
+        long count = goodsBrandMapper.updateByPrimaryKeySelective(goodsBrand);
+        if (count > 0){
+            GoodsBrand brand = goodsBrandMapper.selectByPrimaryKey(goodsBrand.getId());
+            return DozerUtils.convert(brand, GoodsBrandVo.class);
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    public long deleteBrandById(Integer id) {
+        return goodsBrandMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public GoodsBrandVo disableBrandById(Integer id) {
+        GoodsBrand goodsBrand = new GoodsBrand();
+        goodsBrand.setId(id);
+        goodsBrand.setStatus(true);
+        return updateGoodsBrand(goodsBrand);
+    }
+
+    @Override
+    public GoodsBrandVo enableBrandById(Integer id) {
+        GoodsBrand goodsBrand = new GoodsBrand();
+        goodsBrand.setId(id);
+        goodsBrand.setStatus(false);
+        return updateGoodsBrand(goodsBrand);
+    }
+
 
 }

@@ -105,7 +105,7 @@ public class GoodsController {
     @RequestMapping(value = "/update/{id}",method = RequestMethod.POST)
     public ServerResponse<GoodsDetailVo> updateGoods(@PathVariable Integer id,
                                                      @RequestBody GoodsForm goodsForm){
-        GoodsDetailVo goodsDetailVo= goodsService.updateGoods(id,goodsForm);
+        GoodsDetailVo goodsDetailVo = goodsService.updateGoods(id,goodsForm);
         if (goodsDetailVo!=null){
             return ServerResponse.createBySuccess(Const.SUCCESS_MSG, goodsDetailVo);
         }
@@ -121,7 +121,7 @@ public class GoodsController {
     @ApiOperation(value = "增加商品")
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public ServerResponse<GoodsDetailVo> insertGoods(@RequestBody GoodsForm goodsForm){
-        GoodsDetailVo goodsDetailVo=goodsService.insertGoods(goodsForm);
+        GoodsDetailVo goodsDetailVo = goodsService.insertGoods(goodsForm);
         if (goodsDetailVo!=null){
             return ServerResponse.createBySuccess(Const.SUCCESS_MSG,goodsDetailVo);
         }
@@ -131,7 +131,7 @@ public class GoodsController {
     @ApiOperation(value = "删除商品")
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public ServerResponse<Integer> deleteGoods(@RequestParam Integer id){
-        Integer count=goodsService.deleteByPrimaryId(id);
+        Integer count = goodsService.deleteByPrimaryId(id);
         return ServerResponse.createBySuccess(Const.SUCCESS_MSG,count);
     }
 

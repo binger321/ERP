@@ -74,4 +74,9 @@ public class GoodsServiceImpl implements GoodsService{
     public Integer deleteByPrimaryId(Integer id) {
         return goodsMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public long countGoodsByExample(GoodsExample goodsExample) {
+        return goodsMapper.countByExample(goodsExample);
+    }
 }

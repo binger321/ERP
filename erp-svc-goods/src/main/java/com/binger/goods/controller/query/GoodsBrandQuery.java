@@ -33,16 +33,5 @@ public class GoodsBrandQuery {
     @ApiModelProperty(value="品牌名称")
     private String brandName;
 
-    /**
-     * 国家编码
-     */
-    @ApiModelProperty(value="国家编码")
-    private String countryCode;
-
-    /**
-     * 国家名称
-     */
-    @ApiModelProperty(value="国家名称")
-    private String countryName;
 
 }

@@ -59,4 +59,11 @@ public interface GoodsService {
      * @return
      */
     Integer deleteByPrimaryId(Integer id);
+
+    /**
+     * 根据少量的条件查询商品数量
+     * @param goodsExample
+     * @return
+     */
+    long countGoodsByExample(GoodsExample goodsExample);
 }
