@@ -17,11 +17,6 @@ import java.util.Date;
 @Data
 @ApiModel("颜色Query")
 public class GoodsColorQuery {
-    /**
-     * ID
-     */
-    @ApiModelProperty(value="ID",required = false)
-    private Integer id;
 
     /**
      * 颜色编码
@@ -34,23 +29,5 @@ public class GoodsColorQuery {
      */
     @ApiModelProperty(value="颜色名称",required = false)
     private String colorName;
-
-    /**
-     * 备注
-     */
-    @ApiModelProperty(value="备注",required = false)
-    private String remark;
-
-    /**
-     * 0禁用, 1启用
-     */
-    @ApiModelProperty(value="0禁用, 1启用",required = false)
-    private Boolean status;
-
-    /**
-     * 停用时间
-     */
-    @ApiModelProperty(value="停用时间",required = false)
-    private Date blockTime;
 
 }

@@ -1,5 +1,13 @@
 package com.binger.goods.service;
 
+import com.binger.goods.domain.GoodsSize;
+import com.binger.goods.domain.GoodsSizeExample;
+import com.binger.goods.vo.GoodsDetailVo;
+import com.binger.goods.vo.GoodsSizeDetailVo;
+import com.binger.goods.vo.GoodsSizeVo;
+
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuyubin
@@ -9,4 +17,32 @@ package com.binger.goods.service;
  * Description:
  */
 public interface GoodsSizeService {
+    /**
+     * 得到条件下size的数量
+     * @param goodsSizeExample
+     * @return
+     */
+    long countSizesByExample(GoodsSizeExample goodsSizeExample);
+
+    /**
+     * 得到size列表
+     * @param goodsSizeExample
+     * @return
+     */
+    List<GoodsSizeVo> listSizeByExample(GoodsSizeExample goodsSizeExample);
+
+    /**
+     * 根据id查询尺寸
+     * @param id
+     * @return
+     */
+    GoodsSizeDetailVo selectSizeByPrimaryId(Integer id);
+
+    /**
+     * 根据id更新尺寸
+     * @param goodsSize
+     * @param id
+     * @return
+     */
+    GoodsSizeDetailVo updateSizeById(GoodsSize goodsSize, Integer id);
 }

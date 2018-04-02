@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-@Api(value = "goodsBrand",description = "商品品牌接口", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(value = "goodsSku",description = "商品品牌接口", produces = MediaType.APPLICATION_JSON_VALUE)
 @RestController(value = "商品SkuAPI")
-@RequestMapping(value = "erp-svc-goods/goodsBrand")
+@RequestMapping(value = "erp-svc-goods/goodsSku")
 public class GoodsSkuController {
 }

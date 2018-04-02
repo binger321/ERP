@@ -2,6 +2,7 @@ package com.binger.goods.service;
 
 import com.binger.goods.domain.GoodsBrand;
 import com.binger.goods.domain.GoodsBrandExample;
+import com.binger.goods.vo.GoodsBrandDetailVo;
 import com.binger.goods.vo.GoodsBrandVo;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public interface GoodsBrandService {
      * @param id
      * @return
      */
-    GoodsBrandVo findBrandById(Integer id);
+    GoodsBrandDetailVo findBrandById(Integer id);
 
     /**
      * 新增品牌
@@ -56,7 +57,7 @@ public interface GoodsBrandService {
      * @param goodsBrand
      * @return
      */
-    GoodsBrandVo updateGoodsBrand(GoodsBrand goodsBrand);
+    GoodsBrandDetailVo updateGoodsBrand(GoodsBrand goodsBrand);
 
     /**
      * 根据id删除品牌

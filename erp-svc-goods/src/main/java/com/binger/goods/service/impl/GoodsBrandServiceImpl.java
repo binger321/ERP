@@ -5,6 +5,7 @@ import com.binger.goods.dao.GoodsBrandMapper;
 import com.binger.goods.domain.GoodsBrand;
 import com.binger.goods.domain.GoodsBrandExample;
 import com.binger.goods.service.GoodsBrandService;
+import com.binger.goods.vo.GoodsBrandDetailVo;
 import com.binger.goods.vo.GoodsBrandVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,10 @@ public class GoodsBrandServiceImpl implements GoodsBrandService {
     }
 
     @Override
-    public GoodsBrandVo findBrandById(Integer id) {
+    public GoodsBrandDetailVo findBrandById(Integer id) {
         GoodsBrand goodsBrand = goodsBrandMapper.selectByPrimaryKey(id);
-        GoodsBrandVo goodsBrandVo = DozerUtils.convert(goodsBrand, GoodsBrandVo.class);
-        return goodsBrandVo;
+        GoodsBrandDetailVo goodsBrandDetailVo = DozerUtils.convert(goodsBrand, GoodsBrandDetailVo.class);
+        return goodsBrandDetailVo;
     }
 
     @Override
@@ -72,11 +73,11 @@ public class GoodsBrandServiceImpl implements GoodsBrandService {
     }
 
     @Override
-    public GoodsBrandVo updateGoodsBrand(GoodsBrand goodsBrand) {
+    public GoodsBrandDetailVo updateGoodsBrand(GoodsBrand goodsBrand) {
         long count = goodsBrandMapper.updateByPrimaryKeySelective(goodsBrand);
         if (count > 0){
             GoodsBrand brand = goodsBrandMapper.selectByPrimaryKey(goodsBrand.getId());
-            return DozerUtils.convert(brand, GoodsBrandVo.class);
+            return DozerUtils.convert(brand, GoodsBrandDetailVo.class);
         }else {
             return null;
         }
@@ -92,7 +93,7 @@ public class GoodsBrandServiceImpl implements GoodsBrandService {
         GoodsBrand goodsBrand = new GoodsBrand();
         goodsBrand.setId(id);
         goodsBrand.setStatus(true);
-        return updateGoodsBrand(goodsBrand);
+        return DozerUtils.convert(updateGoodsBrand(goodsBrand), GoodsBrandVo.class);
     }
 
     @Override
@@ -100,7 +101,7 @@ public class GoodsBrandServiceImpl implements GoodsBrandService {
         GoodsBrand goodsBrand = new GoodsBrand();
         goodsBrand.setId(id);
         goodsBrand.setStatus(false);
-        return updateGoodsBrand(goodsBrand);
+        return DozerUtils.convert(updateGoodsBrand(goodsBrand), GoodsBrandVo.class);
     }
 
 
